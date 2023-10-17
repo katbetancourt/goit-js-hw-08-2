@@ -1,5 +1,5 @@
 // Add imports above this line
-import { galleryItems } from './gallery-items';
+import { galleryItems } from "./gallery-items";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 // Change code below this line
@@ -23,11 +23,8 @@ const galleryMarkup = galleryItems
 
 gallery.innerHTML = galleryMarkup;
 
-
 const lightbox = new SimpleLightbox(".gallery a", {
-  captions: true, 
+  captions: true,
 });
 
 console.log(galleryItems);
-
-
