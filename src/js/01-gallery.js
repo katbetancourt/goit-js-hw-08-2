@@ -4,27 +4,37 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 // Change code below this line
 
-const gallery = document.querySelector(".gallery");
 
-const galleryMarkup = galleryItems
-  .map(
-    (item) => `
-    <li class="gallery__item">
-      <a class="gallery__link" href="${item.original}">
-        <img
-          class="gallery__image"
-          src="${item.preview}"
-          data-caption="${item.description}"
-        />
-      </a>
-    </li>`
-  )
-  .join("");
+function createGalleryItems(items) {
+  const gallery = document.querySelector(".gallery");
 
-gallery.innerHTML = galleryMarkup;
+  items.forEach((item) => {
+    const galleryItem = document.createElement("li");
+    galleryItem.classList.add("gallery__item");
 
-const lightbox = new SimpleLightbox(".gallery a", {
-  captions: true,
+    const galleryLink = document.createElement("a");
+    galleryLink.classList.add("gallery__link");
+    galleryLink.href = item.original;
+
+    const galleryImage = document.createElement("img");
+    galleryImage.classList.add("gallery__image");
+    galleryImage.src = item.preview;
+    galleryImage.alt = item.description;
+
+    galleryLink.appendChild(galleryImage);
+    galleryItem.appendChild(galleryLink);
+    gallery.appendChild(galleryItem);
+  });
+}
+
+createGalleryItems(galleryItems);
+
+document.addEventListener("DOMContentLoaded", function () {
+ 
+  const gallery = new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: 250,
+  });
 });
 
 console.log(galleryItems);
